@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Cap → Headcount Projector</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <h1>Cap &rarr; Headcount Projector</h1>
+    <p class="sub">Type or paste a cap number, hit Enter, get an instant headcount + achievable volume projection. No screenshots, no external calls — everything runs in this page.</p>
+
+    <div class="card">
+      <h3>Paste dashboard data</h3>
+      <p class="hint" style="margin-top:0;">Copy the cap rows straight from the dashboard (timestamp, "Package count", label, value, breakdown) and paste below — it parses automatically.</p>
+      <textarea id="pasteBox" rows="8" placeholder="Paste the raw dashboard rows here..."></textarea>
+      <div id="parseStatus" class="hint"></div>
+    </div>
+
+    <div class="card">
+      <div class="quick-entry">
+        <label>
+          Soft cap
+          <input type="number" id="softCap" placeholder="e.g. 1500" autofocus />
+        </label>
+        <label>
+          Hard cap
+          <input type="number" id="hardCap" placeholder="e.g. 2180" />
+        </label>
+        <label>
+          Cycle B hours
+          <input type="number" id="cycleBHours" step="0.25" />
+        </label>
+        <label>
+          Cycle C hours
+          <input type="number" id="cycleCHours" step="0.25" />
+        </label>
+      </div>
+      <div class="hint">Results update live as you type — no button needed. Press <kbd>Tab</kbd> to move between fields.</div>
+    </div>
+
+    <div class="card" id="resultsCard">
+      <h3>Projected headcount & achievable volume</h3>
+      <table id="resultsTable">
+        <thead>
+          <tr><th>Cycle</th><th>Cap level</th><th>Volume</th>
+              <th>Induct needed</th><th>Stow needed</th>
+              <th>Recommended HC</th><th>Achievable vol</th>
+              <th>Meets target?</th><th>Shortfall</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p class="note">"+" on recommended headcount = space-capped (max induct/stow heads reached); extra heads won't help without more room, hours, or an added cycle.</p>
+    </div>
+
+    <div class="card">
+      <details id="settingsDetails">
+        <summary>Rates & space caps (click to adjust — auto-saved in this browser)</summary>
+        <div class="settings-grid" id="settingsGrid"></div>
+        <button id="resetBtn" class="secondary">Reset to defaults</button>
+      </details>
+    </div>
+  </div>
+  <script src="parser.js"></script>
+  <script src="rates.js"></script>
+  <script src="headcount.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
